@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <GridView
+        android:id="@+id/gridView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="3"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:padding="package com.example.program10;
+
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.GridView;
+
+public class ImageAdapter extends BaseAdapter
+{
+    Context context;
+    int[] images;
+
+    public ImageAdapter(Context context,int[] images)
+    {
+        this.context=context;
+        this.images=images;
+    }
+
+    @Override
+    public int getCount()
+    {
+        return images.length;
+    }
+
+    @Override
+    public Object getItem(int position)
+    {
+        return images[position];
+    }
+
+    @Override
+    public long getItemId(int position)
+    {
+        return position;
+    }
+
+    @Override
+    public View getView(int position,View convertView,ViewGroup parent)
+    {
+        ImageView imageView;
+
+        if(convertView==null)
+        {
+            imageView=new ImageView(context);
+            imageView.setLayoutParams(
+                    new GridView.LayoutParams(250,250));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setPadding(5,5,5,5);
+        }
+        else
+        {
+            imageView=(ImageView) convertView;
+        }
+        imageView.setImageResource(images[position]);
+        return imageView;
+    }
+}10dp"/>
+
+</LinearLayout>
+
+package com.example.program10;
+
+import android.app.AlertDialog;
+import android.os.Bundle;
+import android.widget.GridView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity
+{
+    GridView gridView;
+    int[] images=
+            {
+                    R.drawable.apple,
+                    R.drawable.banana,
+                    R.drawable.orange,
+                    R.drawable.mango,
+                    R.drawable.grapes,
+                    R.drawable.watermelon
+
+            };
+    String[] names=
+            {
+                    "Apple",
+                    "Banana",
+                    "Orange",
+                    "Mango",
+                    "Grapes",
+                    "Watermelon"
+            };
+    @Override
+    protected  void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        gridView=findViewById(R.id.gridView);
+        ImageAdapter adapter=new ImageAdapter(this,images);
+        gridView.setAdapter(adapter);
+
+        gridView.setOnItemClickListener((parent,view,position,id)->{
+            new AlertDialog.Builder(MainActivity.this)
+                    .setTitle("Selected Item")
+                    .setMessage("You selected:"+names[position])
+                    .setPositiveButton("OK",null)
+                    .show();
+        });
+
+    }
+
+}
+
+
+
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ImageAdapter">
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+package com.example.program10;
+
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import android.widget.GridView;
+
+public class ImageAdapter extends BaseAdapter
+{
+    Context context;
+    int[] images;
+
+    public ImageAdapter(Context context,int[] images)
+    {
+        this.context=context;
+        this.images=images;
+    }
+
+    @Override
+    public int getCount()
+    {
+        return images.length;
+    }
+
+    @Override
+    public Object getItem(int position)
+    {
+        return images[position];
+    }
+
+    @Override
+    public long getItemId(int position)
+    {
+        return position;
+    }
+
+    @Override
+    public View getView(int position,View convertView,ViewGroup parent)
+    {
+        ImageView imageView;
+
+        if(convertView==null)
+        {
+            imageView=new ImageView(context);
+            imageView.setLayoutParams(
+                    new GridView.LayoutParams(250,250));
+            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setPadding(5,5,5,5);
+        }
+        else
+        {
+            imageView=(ImageView) convertView;
+        }
+        imageView.setImageResource(images[position]);
+        return imageView;
+    }
+}
+
