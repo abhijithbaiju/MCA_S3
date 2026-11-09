@@ -1,21 +1,32 @@
-def calculate_grade(mark):
-    if(mark>=90):
+def calculate_total(m1, m2, m3):
+    return m1 + m2 + m3
+
+def calculate_percentage(total):
+    return (total / 300) * 100
+
+def calculate_grade(percentage):
+    if percentage >= 90:
         return "A+"
-    elif (mark >=80):
+    elif percentage >= 80:
         return "A"
-    elif (mark >=70):
+    elif percentage >= 70:
         return "B"
-    elif (mark >= 60):
-         return"C"
-    elif (mark >= 50):
+    elif percentage >= 60:
+        return "C"
+    elif percentage >= 50:
         return "D"
     else:
-        return "F"
+        return "Fail"
 
-name=input("Enter the Name:")
-mark=float(input("Enter the mark:"))
-grade=calculate_grade(mark)
+# Main program
+m1 = int(input("Enter mark of Subject 1: "))
+m2 = int(input("Enter mark of Subject 2: "))
+m3 = int(input("Enter mark of Subject 3: "))
 
-print("Name:",name)
-print("Mark:",mark)
-print("Grade:",grade,"grade")
+total = calculate_total(m1, m2, m3)
+percentage = calculate_percentage(total)
+grade = calculate_grade(percentage)
+
+print("Total Mark:", total)
+print("Percentage:", percentage, "%")
+print("Grade:", grade)
